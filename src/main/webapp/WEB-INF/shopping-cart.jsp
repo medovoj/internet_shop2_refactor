@@ -1,6 +1,4 @@
-<%@ page import="Constants.Constants" %>
-<%@ page import="Constants.Constants" %>
-<%@ page import="static Constants.Constants.CURRENT_SHOPPING_CART" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--
 <%@ page
@@ -11,9 +9,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% if (session.getAttribute(CURRENT_SHOPPING_CART) != null) {%>
-    Total count = ${CURRENT_SHOPPING_CART.totalCount}<br>
-    Products = <br>${CURRENT_SHOPPING_CART.view}
-<% }else{ %>
-Shopping cart is null
-<% } %>
+
+<c:choose>
+    <c:when test="${CURRENT_SHOPPING_CART != null}">
+        Total Count: ${CURRENT_SHOPPING_CART.totalCount}<br>
+        Products: <br>
+        <c:forEach var="it" items="${CURRENT_SHOPPING_CART.items}">
+            ${it.idProduct} -&gt;${it.count}<br>
+        </c:forEach>
+    </c:when>
+    <c:otherwise>
+        Shopping cart is null.
+    </c:otherwise>
+</c:choose>
+
