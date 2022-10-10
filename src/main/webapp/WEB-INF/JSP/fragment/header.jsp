@@ -6,10 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -22,16 +23,19 @@
                 </button>
                 <a class="navbar-brand" href="/products">My Shop</a>
             </div>
+
+
+
             <div class="collapse navbar-collapse" id="shopNav">
                 <ul id="currentShoppingCart" class="nav navbar-nav navbar-right ">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping cart (<span class="total-count">0</span>)<span class="caret"></span>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Shopping cart (<span class="total-count">0</span>)<span class="caret"></span>
                         </a>
                         <div class="dropdown-menu shopping-cart-desc">
                             Total count: <span class="total-count">0</span><br>
                             Total cost: <span class="total-cost">0</span><br>
-                            <a href="/shopping-cart" class="btn btn-primary">View cart</a>
+                            <a href="shopping-cart1" class="btn btn-primary">View cart</a>
                         </div>
                     </li>
                 </ul>
@@ -40,4 +44,3 @@
         </div>
     </nav>
 </body>
-</html>

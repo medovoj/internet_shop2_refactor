@@ -7,35 +7,30 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import Model.ShoppingCart;
+import Filter.AbstractFilter;
 
 import java.io.IOException;
 
-@WebFilter("/*")
-public class AutoRestoreShoppingCartFilter implements Filter {
+@WebFilter(filterName = "AutoRestoreShoppingCartFilter")
+public class AutoRestoreShoppingCartFilter extends AbstractFilter {
 
     private static final String SHOPPING_CART_DESERIALIZATION_DONE = "SHOPPING_CART_DESERIALIZATION_DONE";
 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        Filter.super.init(filterConfig);
-    }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(HttpServletRequest servletRequest, HttpServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
-        if(request.getSession().getAttribute(SHOPPING_CART_DESERIALIZATION_DONE) == null){
-            if (!SessionUtils.isCurrentShoppingCartCreated(request)){
-                Cookie cookie = SessionUtils.findShoppingCartCookie(request);
-                if (cookie != null){
+        if (servletRequest.getSession().getAttribute(SHOPPING_CART_DESERIALIZATION_DONE) == null) {
+            if (!SessionUtils.isCurrentShoppingCartCreated(servletRequest)) {
+                Cookie cookie = SessionUtils.findShoppingCartCookie(servletRequest);
+                if (cookie != null) {
                     ShoppingCart shoppingCart = shoppingCartFromString(cookie.getValue());
-                    SessionUtils.setCurrentShoppingCart(request, shoppingCart);
+                    SessionUtils.setCurrentShoppingCart(servletRequest, shoppingCart);
                 }
             }
-            request.getSession().setAttribute(SHOPPING_CART_DESERIALIZATION_DONE, Boolean.TRUE);
+            servletRequest.getSession().setAttribute(SHOPPING_CART_DESERIALIZATION_DONE, Boolean.TRUE);
         }
-        filterChain.doFilter(request, response);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     protected ShoppingCart shoppingCartFromString(String cookieValue) {
@@ -52,4 +47,5 @@ public class AutoRestoreShoppingCartFilter implements Filter {
             }
         }
         return shoppingCart;
-}}
+    }
+}

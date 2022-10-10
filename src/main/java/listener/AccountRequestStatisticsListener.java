@@ -8,43 +8,47 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import Constants.Constants;
 
 @WebListener
+@SuppressWarnings("unchecked")
 public class AccountRequestStatisticsListener implements ServletRequestListener {
+
     @Override
     public void requestDestroyed(ServletRequestEvent sre) {
-        ServletRequestListener.super.requestDestroyed(sre);
     }
+
 
     @Override
     public void requestInitialized(ServletRequestEvent sre) {
-        HttpServletRequest request = (HttpServletRequest) sre.getServletRequest();
-        List<String> actions = (List<String>) request.getSession().getAttribute(Constants.ACCOUNT_ACTIONS_HISTORY);
-        if (actions == null){
+        HttpServletRequest req = ((HttpServletRequest) sre.getServletRequest());
+        List<String> actions = (List<String>) req.getSession().getAttribute(Constants.ACCOUNT_ACTIONS_HISTORY);
+        if (actions == null) {
             actions = new ArrayList<>();
-            request.getSession().setAttribute(Constants.ACCOUNT_ACTIONS_HISTORY, actions);
+            req.getSession().setAttribute(Constants.ACCOUNT_ACTIONS_HISTORY, actions);
         }
-        actions.add(getCurrentAction(request));
+        actions.add(getCurrentAction(req));
     }
 
-    private String getCurrentAction(HttpServletRequest request){
-        StringBuilder sb = new StringBuilder(request.getMethod()).append(" ").append(request.getRequestURI());
-        Map<String, String[]> map = request.getParameterMap();
-        if (map != null){
+    private String getCurrentAction(HttpServletRequest req) {
+        StringBuilder sb = new StringBuilder(req.getMethod()).append(" ").append(req.getRequestURI());
+        Map<String, String[]> map = req.getParameterMap();
+        if (map != null) {
             boolean first = true;
-            for (Map.Entry<String, String[]> entry : map.entrySet()){
-                if (first){
-                    sb.append("?");
+            for (Map.Entry<String, String[]> entry : map.entrySet()) {
+                if (first) {
+                    sb.append('?');
                     first = false;
-                } else{
-                    sb.append("&");
+                } else {
+                    sb.append('&');
                 }
-                for(String value : entry.getValue()){
-                    sb.append(entry.getKey()).append("=").append(value).append("&");
+                for (String value : entry.getValue()) {
+                    sb.append(entry.getKey()).append('=').append(value).append('&');
                 }
+                sb.deleteCharAt(sb.length() - 1);
             }
         }
-        return  sb.toString();
+        return sb.toString();
     }
 }
