@@ -1,6 +1,7 @@
 package Servlets.page;
 
 import Servlets.AbstractController;
+import WebUtils.SessionUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -13,6 +14,10 @@ public class ShowShoppingCartController extends AbstractController {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RoutingUtils.forwardToPage("shopping-cart.jsp", req, resp);
+        if (SessionUtils.isCurrentShoppingCartCreated(req)) {
+            RoutingUtils.forwardToPage("shopping-cart.jsp", req, resp);
+        } else {
+            RoutingUtils.redirect("/products", req, resp);
+        }
     }
 }

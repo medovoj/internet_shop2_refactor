@@ -1,39 +1,42 @@
 package Model;
 
 
+import Entity.Product;
 import Exception.ValidationException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import Constants.Constants;
 
 
 
 public class ShoppingCart implements Serializable {
-
-    private final Map<Integer, CartItem> products = new HashMap<>();
+    private Map<Integer, CartItem> products = new LinkedHashMap<>();
     private int totalCount = 0;
+    private BigDecimal totalCost = BigDecimal.ZERO;
 
-    public void addProduct(int idProduct, int count) {
-        validateShoppingCartSize(idProduct);
-        CartItem shoppingCartItem = products.get(idProduct);
-        if (shoppingCartItem == null) {
+    public void addProduct(Product product, int count) {
+        validateShoppingCartSize(product.getId());
+        CartItem cartItem = products.get(product.getId());
+        if (cartItem == null) {
             validateProductCount(count);
-            shoppingCartItem = new CartItem(idProduct, count);
-            products.put(idProduct, shoppingCartItem);
+            cartItem = new CartItem(product, count);
+            products.put(product.getId(), cartItem);
         } else {
-            validateProductCount(count + shoppingCartItem.getCount());
-            shoppingCartItem.setCount(shoppingCartItem.getCount() + count);
+            validateProductCount(count + cartItem.getCount());
+            cartItem.setCount(cartItem.getCount() + count);
         }
         refreshStatistics();
     }
 
     public void removeProduct(Integer idProduct, int count) {
-        CartItem shoppingCartItem = products.get(idProduct);
-        if (shoppingCartItem != null) {
-            if (shoppingCartItem.getCount() > count) {
-                shoppingCartItem.setCount(shoppingCartItem.getCount() - count);
+        CartItem cartItem = products.get(idProduct);
+        if (cartItem != null) {
+            if (cartItem.getCount() > count) {
+                cartItem.setCount(cartItem.getCount() - count);
             } else {
                 products.remove(idProduct);
             }
@@ -49,36 +52,34 @@ public class ShoppingCart implements Serializable {
         return totalCount;
     }
 
+    public BigDecimal getTotalCost() {
+        return totalCost;
+    }
+
     private void validateProductCount(int count) {
-        if (count > Constants.MAX_PRODUCTS_COUNT) {
-            throw new ValidationException("Limit for product count reached: count=" + count);
+        if(count > Constants.MAX_PRODUCTS_COUNT){
+            throw new ValidationException("Limit for product count reached: count="+count);
         }
     }
 
-    private void validateShoppingCartSize(int idProduct) {
-        if (products.size() > Constants.MAX_PRODUCTS_CART_CAPACITY ||
+    private void validateShoppingCartSize(int idProduct){
+        if(products.size() > Constants.MAX_PRODUCTS_CART_CAPACITY ||
                 (products.size() == Constants.MAX_PRODUCTS_CART_CAPACITY && !products.containsKey(idProduct))) {
-            throw new ValidationException("Limit for ShoppingCart size reached: size=" + products.size());
+            throw new ValidationException("Limit for ShoppingCart size reached: size="+products.size());
         }
     }
 
     private void refreshStatistics() {
         totalCount = 0;
-        for (CartItem shoppingCartItem : getItems()) {
-            totalCount += shoppingCartItem.getCount();
+        totalCost = BigDecimal.ZERO;
+        for (CartItem cartItem : getItems()) {
+            totalCount += cartItem.getCount();
+            totalCost = totalCost.add(cartItem.getProduct().getPrice().multiply(BigDecimal.valueOf(cartItem.getCount())));
         }
     }
 
     @Override
     public String toString() {
-        return String.format("ShoppingCart [products=%s, totalCount=%s]", products, totalCount);
-    }
-
-    public String getView (){
-        StringBuilder sb = new StringBuilder();
-        for (CartItem item : getItems()) {
-            sb.append(item.getIdProduct()).append("-&gt;").append(item.getCount()).append("<br>");
-        }
-        return sb.toString();
+        return String.format("ShoppingCart [products=%s, totalCount=%s, totalCost=%s]", products, totalCount, totalCost);
     }
 }

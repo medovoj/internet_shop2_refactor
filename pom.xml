@@ -54,8 +54,11 @@
             <version>2.9.0</version>
         </dependency>
 
-
-
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20220924</version>
+        </dependency>
 
 
     </dependencies>
@@ -80,11 +83,6 @@
                 <version>3.0.0</version>
             </plugin>
 
-
         </plugins>
-
-
     </build>
-
-
 </project>

@@ -1,10 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
-
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true"%>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 
 <%--
   Created by IntelliJ IDEA.
@@ -13,12 +10,13 @@
   Time: 16:45
   To change this template use File | Settings | File Templates.
 --%>
+
 <div class="visible-xs-block xs-option-container">
     <a class="pull-right" data-toggle="collapse" href="#productCatalog">Product catalog <span class="caret"></span></a>
     <a data-toggle="collapse" href="#findProducts">Find products <span class="caret"></span></a>
 </div>
 <%-- Search form --%>
-<form class="search" action="/search">
+<form class="search" action="search">
     <div id="findProducts" class="panel panel-success collapse">
         <div class="panel-heading">Find products</div>
         <div class="panel-body">
@@ -28,11 +26,13 @@
 					<a id="goSearch" class="btn btn-default">Go!</a>
 				</span>
             </div>
-
+            <div class="more-options">
+                <a data-toggle="collapse" href="#searchOptions">More filters <span class="caret"></span></a>
+            </div>
         </div>
-        <div id="searchOptions">
-            <tags:category-filter categories="${CATEGORY_LIST }" />
-            <tags:producer-filter producers="${PRODUCER_LIST }" />
+        <div id="searchOptions" class="collapse ${!searchForm.categoriesEmpty or !searchForm.producersEmpty ? 'in' : '' }">
+            <tags:category-filter categories="${CATEGORY_LIST}" searchForm="${serarcForm}" />
+            <tags:producer-filter producers="${PRODUCER_LIST }"  searchForm="${searchForm}" />
         </div>
     </div>
 </form>

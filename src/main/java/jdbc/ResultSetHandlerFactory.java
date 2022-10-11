@@ -3,7 +3,6 @@ package jdbc;
 import Entity.Category;
 import Entity.Producer;
 import Entity.Product;
-import service.ProductService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -49,6 +48,8 @@ public final class ResultSetHandlerFactory {
             return p;
         }
     };
+
+
 
     public final static ResultSetHandler<Integer> getCountResultSetHandler() {
         return new ResultSetHandler<Integer>() {

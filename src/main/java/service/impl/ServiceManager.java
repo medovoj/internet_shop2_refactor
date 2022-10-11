@@ -20,11 +20,9 @@ public class ServiceManager {
         }
         return instance;
     }
-
     public ProductService getProductService() {
         return productService;
     }
-
     public OrderService getOrderService() {
         return orderService;
     }
@@ -32,12 +30,10 @@ public class ServiceManager {
     public String getApplicationProperty(String key) {
         return applicationProperties.getProperty(key);
     }
-
     public void close() {
         try {
             dataSource.close();
         } catch (SQLException e) {
-            //LOGGER.error("Close datasource failed: "+e.getMessage(), e);
         }
     }
 
@@ -45,15 +41,14 @@ public class ServiceManager {
     private final BasicDataSource dataSource;
     private final ProductService productService;
     private final OrderService orderService;
-
     private ServiceManager(ServletContext context) {
         loadApplicationProperties();
         dataSource = createDataSource();
         productService = new ProductServiceImpl(dataSource);
-        orderService = new OrderServiceImpl();
+        orderService = new OrderServiceImpl(dataSource);
     }
 
-    private BasicDataSource createDataSource() {
+    private BasicDataSource createDataSource(){
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDefaultAutoCommit(false);
         dataSource.setRollbackOnReturn(true);
@@ -66,8 +61,8 @@ public class ServiceManager {
         return dataSource;
     }
 
-    private void loadApplicationProperties() {
-        try (InputStream in = ServiceManager.class.getClassLoader().getResourceAsStream("application.properties")) {
+    private void loadApplicationProperties(){
+        try(InputStream in = ServiceManager.class.getClassLoader().getResourceAsStream("application.properties")) {
             applicationProperties.load(in);
         } catch (IOException e) {
             throw new RuntimeException(e);

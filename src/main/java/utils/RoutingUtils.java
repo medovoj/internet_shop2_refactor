@@ -3,6 +3,7 @@ package utils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -20,6 +21,12 @@ public final class RoutingUtils {
     public static void sendHTMLFragment(String text, HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html");
         resp.getWriter().println(text);
+        resp.getWriter().close();
+    }
+
+    public static void sendJSON(JSONObject json, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("application/json");
+        resp.getWriter().println(json.toString());
         resp.getWriter().close();
     }
 
