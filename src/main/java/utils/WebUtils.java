@@ -20,6 +20,15 @@ public final class WebUtils {
         return null;
     }
 
+    public static String getCurrentRequestUrl(HttpServletRequest req) {
+        String query = req.getQueryString();
+        if (query == null) {
+            return req.getRequestURI();
+        } else {
+            return req.getRequestURI() + "?" + query;
+        }
+    }
+
     public static void setCookie(String name, String value, int age, HttpServletResponse resp) {
         Cookie c = new Cookie(name, value);
         c.setMaxAge(age);

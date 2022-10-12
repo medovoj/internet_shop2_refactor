@@ -11,7 +11,6 @@ public class Order extends AbstractEntity<Long> {
     private Timestamp created;
 
     public Order() {
-
     }
 
     public Integer getIdAccount() {

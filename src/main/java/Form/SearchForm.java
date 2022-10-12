@@ -52,11 +52,11 @@ public class SearchForm {
         this.producers = producers;
     }
 
-    public boolean isCategoriesEmpty() {
+    public boolean isCategoriesNotEmpty() {
         return !categories.isEmpty();
     }
 
-    public boolean isProducersEmpty() {
+    public boolean isProducersNotEmpty() {
         return !producers.isEmpty();
     }
 }

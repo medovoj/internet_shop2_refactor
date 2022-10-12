@@ -6,10 +6,21 @@ public class OrderItem extends AbstractEntity<Long> {
     private Product product;
     private int count;
 
+    public OrderItem() {
+    }
+
     public OrderItem(Product product, int count) {
         super();
         this.product = product;
         this.count = count;
+    }
+
+    public Long getIdOrder() {
+        return idOrder;
+    }
+
+    public void setIdOrder(Long idOrder) {
+        this.idOrder = idOrder;
     }
 
     public Long getIdItem() {
