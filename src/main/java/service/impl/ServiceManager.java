@@ -4,6 +4,7 @@ import jakarta.servlet.ServletContext;
 import org.apache.commons.dbcp2.BasicDataSource;
 import service.OrderService;
 import service.ProductService;
+import service.SocialService;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +24,9 @@ public class ServiceManager {
     public ProductService getProductService() {
         return productService;
     }
+
+
+
     public OrderService getOrderService() {
         return orderService;
     }
@@ -41,11 +45,18 @@ public class ServiceManager {
     private final BasicDataSource dataSource;
     private final ProductService productService;
     private final OrderService orderService;
+    private final SocialService socialService;
+
+    public SocialService getSocialService() {
+        return socialService;
+    }
+
     private ServiceManager(ServletContext context) {
         loadApplicationProperties();
         dataSource = createDataSource();
         productService = new ProductServiceImpl(dataSource);
         orderService = new OrderServiceImpl(dataSource);
+        socialService = new FacebookSocialService(this);
     }
 
     private BasicDataSource createDataSource(){

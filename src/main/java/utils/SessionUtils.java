@@ -1,6 +1,7 @@
-package WebUtils;
+package utils;
 
 
+import Model.CurrentAccount;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,5 +43,16 @@ public class SessionUtils {
         WebUtils.setCookie(Constants.Cookie.SHOPPING_CART.getName(), cookieValue, Constants.Cookie.SHOPPING_CART.getTtl(), resp);
     }
 
+    public static CurrentAccount getCurrentAccount(HttpServletRequest req) {
+        return (CurrentAccount) req.getSession().getAttribute(Constants.CURRENT_ACCOUNT);
+    }
+
+    public static void setCurrentAccount(HttpServletRequest req, CurrentAccount currentAccount) {
+        req.getSession().setAttribute(Constants.CURRENT_ACCOUNT, currentAccount);
+    }
+
+    public static boolean isCurrentAccountCreated(HttpServletRequest req) {
+        return getCurrentAccount(req) != null;
+    }
 
 }

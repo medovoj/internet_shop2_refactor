@@ -3,17 +3,19 @@ package Model;
 
 import Entity.Product;
 import Exception.ValidationException;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 import Constants.Constants;
 
 
-
 public class ShoppingCart implements Serializable {
+
     private Map<Integer, CartItem> products = new LinkedHashMap<>();
     private int totalCount = 0;
     private BigDecimal totalCost = BigDecimal.ZERO;
@@ -57,15 +59,15 @@ public class ShoppingCart implements Serializable {
     }
 
     private void validateProductCount(int count) {
-        if(count > Constants.MAX_PRODUCTS_COUNT){
-            throw new ValidationException("Limit for product count reached: count="+count);
+        if (count > Constants.MAX_PRODUCTS_COUNT) {
+            throw new ValidationException("Limit for product count reached: count=" + count);
         }
     }
 
-    private void validateShoppingCartSize(int idProduct){
-        if(products.size() > Constants.MAX_PRODUCTS_CART_CAPACITY ||
+    private void validateShoppingCartSize(int idProduct) {
+        if (products.size() > Constants.MAX_PRODUCTS_CART_CAPACITY ||
                 (products.size() == Constants.MAX_PRODUCTS_CART_CAPACITY && !products.containsKey(idProduct))) {
-            throw new ValidationException("Limit for ShoppingCart size reached: size="+products.size());
+            throw new ValidationException("Limit for ShoppingCart size reached: size=" + products.size());
         }
     }
 

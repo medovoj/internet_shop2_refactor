@@ -2,14 +2,11 @@ package Servlets.ajax;
 
 import Form.ProductForm;
 import Model.ShoppingCart;
-import Servlets.AbstractController;
-import WebUtils.SessionUtils;
+import utils.SessionUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.json.JSONObject;
-import utils.RoutingUtils;
 
 import java.io.IOException;
 
@@ -18,8 +15,10 @@ import java.io.IOException;
 public class AddProductController extends AbstractProductController {
 
     @Override
-    protected void processProductForm(ProductForm form, ShoppingCart shoppingCart, HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void processProductForm(ProductForm form, ShoppingCart shoppingCart, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         getOrderService().addProductToShoppingCart(form, shoppingCart);
+        String cookieValue = getOrderService().serializeShoppingCart(shoppingCart);
+        SessionUtils.updateCurrentShoppingCartCookie(cookieValue, resp);
     }
 }

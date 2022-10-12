@@ -17,8 +17,7 @@ public class ErrorHandlerFilter extends AbstractFilter {
         try {
             chain.doFilter(req, resp);
         } catch (Throwable th) {
-            //String requestUrl = req.getRequestURI();
-            //LOGGER.error("Request " + requestUrl + " failed: " + th.getMessage(), th);
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             RoutingUtils.forwardToPage("error.jsp", req, resp);
         }
     }

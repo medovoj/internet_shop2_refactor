@@ -8,18 +8,21 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import service.OrderService;
 import service.ProductService;
+import service.SocialService;
 import service.impl.ServiceManager;
 
 
 public abstract class AbstractController extends HttpServlet {
-    private static final long serialVersionUID = -2031074947573473708L;
+
     private ProductService productService;
     private OrderService orderService;
+    private SocialService socialService;
 
     @Override
     public final void init() throws ServletException {
         productService = ServiceManager.getInstance(getServletContext()).getProductService();
         orderService =  ServiceManager.getInstance(getServletContext()).getOrderService();
+        socialService = ServiceManager.getInstance(getServletContext()).getSocialService();
     }
 
     public final ProductService getProductService() {
@@ -30,7 +33,7 @@ public abstract class AbstractController extends HttpServlet {
         return orderService;
     }
 
-
+    public SocialService getSocialService() { return socialService; }
 
     public final int getPageCount(int totalCount, int itemsPerPage) {
         int res = totalCount / itemsPerPage;

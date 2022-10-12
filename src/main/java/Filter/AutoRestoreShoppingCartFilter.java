@@ -1,13 +1,12 @@
-package SecurityFilter;
+package Filter;
 
-import WebUtils.SessionUtils;
+import utils.SessionUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import Model.ShoppingCart;
-import Filter.AbstractFilter;
 import service.OrderService;
 import service.impl.ServiceManager;
 

@@ -15,39 +15,48 @@ public class SearchForm {
         this.categories = convert(categories);
         this.producers = convert(producers);
     }
+
     private List<Integer> convert(String[] args) {
-        if(args == null) {
+        if (args == null) {
             return Collections.emptyList();
         } else {
             List<Integer> res = new ArrayList<>(args.length);
-            for(String arg : args) {
+            for (String arg : args) {
                 res.add(Integer.parseInt(arg));
             }
             return res;
         }
     }
+
     public String getQuery() {
         return query;
     }
+
     public void setQuery(String query) {
         this.query = query;
     }
+
     public List<Integer> getCategories() {
         return categories;
     }
+
     public void setCategories(List<Integer> categories) {
         this.categories = categories;
     }
+
     public List<Integer> getProducers() {
         return producers;
     }
+
     public void setProducers(List<Integer> producers) {
         this.producers = producers;
     }
-    public boolean isCategoriesEmpty(){
+
+    public boolean isCategoriesEmpty() {
         return !categories.isEmpty();
     }
-    public boolean isProducersEmpty(){
+
+    public boolean isProducersEmpty() {
         return !producers.isEmpty();
     }
 }

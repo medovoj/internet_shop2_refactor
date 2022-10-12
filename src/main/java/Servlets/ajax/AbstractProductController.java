@@ -3,7 +3,7 @@ package Servlets.ajax;
 import Form.ProductForm;
 import Model.ShoppingCart;
 import Servlets.AbstractController;
-import WebUtils.SessionUtils;
+import utils.SessionUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
