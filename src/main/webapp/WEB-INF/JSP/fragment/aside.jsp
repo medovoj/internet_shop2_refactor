@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
-<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true" %>
 
 
 <%--
@@ -21,7 +21,8 @@
         <div class="panel-heading">Find products</div>
         <div class="panel-body">
             <div class="input-group">
-                <input type="text" name="query" class="form-control" placeholder="Search query" value="${searchForm.query }">
+                <input type="text" name="query" class="form-control" placeholder="Search query"
+                       value="${searchForm.query }">
                 <span class="input-group-btn">
 					<a id="goSearch" class="btn btn-default">Go!</a>
 				</span>
@@ -30,9 +31,10 @@
                 <a data-toggle="collapse" href="#searchOptions">More filters <span class="caret"></span></a>
             </div>
         </div>
-        <div id="searchOptions" class="collapse ${searchForm.categoriesNotEmpty or searchForm.producersNotEmpty ? 'in' : '' }">
-            <tags:category-filter categories="${CATEGORY_LIST}" searchForm="${serarcForm}" />
-            <tags:producer-filter producers="${PRODUCER_LIST }"  searchForm="${searchForm}" />
+        <div id="searchOptions"
+             class="collapse ${searchForm.categoriesNotEmpty or searchForm.producersNotEmpty ? 'in' : '' }">
+            <tags:category-filter categories="${CATEGORY_LIST}" searchForm="${serarcForm}"/>
+            <tags:producer-filter producers="${PRODUCER_LIST }" searchForm="${searchForm}"/>
         </div>
     </div>
 </form>
@@ -42,7 +44,8 @@
     <div class="panel-heading">Product catalog</div>
     <div class="list-group">
         <c:forEach var="category" items="${CATEGORY_LIST }">
-            <a href="/products${category.url }" class="list-group-item ${selectedCategoryUrl == category.url ? 'active' : '' }">
+            <a href="/products${category.url }"
+               class="list-group-item ${selectedCategoryUrl == category.url ? 'active' : '' }">
                 <span class="badge">${category.productCount}</span> ${category.name}
             </a>
         </c:forEach>

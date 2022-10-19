@@ -33,7 +33,7 @@ public class Account extends AbstractEntity<Integer> implements CurrentAccount {
 
     @Override
     public String getDescription() {
-        return name + "("+email+")";
+        return name + "(" + email + ")";
     }
 
     @Override

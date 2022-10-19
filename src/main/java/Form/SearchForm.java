@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class SearchForm {
+
     private String query;
     private List<Integer> categories;
     private List<Integer> producers;

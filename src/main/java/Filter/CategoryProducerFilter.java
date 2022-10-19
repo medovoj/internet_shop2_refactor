@@ -11,12 +11,12 @@ import service.impl.ServiceManager;
 
 import java.io.IOException;
 
-public class CategoryProducerFilter extends AbstractFilter{
+public class CategoryProducerFilter extends AbstractFilter {
 
     private ProductService productService;
 
     @Override
-    public void init(FilterConfig filterConfig){
+    public void init(FilterConfig filterConfig) {
         productService = ServiceManager.getInstance(filterConfig.getServletContext()).getProductService();
     }
 

@@ -3,6 +3,7 @@ package Entity;
 import java.math.BigDecimal;
 
 public class Product extends AbstractEntity<Integer> {
+
     private String name;
     private String description;
     private String imageLink;

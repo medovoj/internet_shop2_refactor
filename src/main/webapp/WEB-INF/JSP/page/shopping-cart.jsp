@@ -8,7 +8,7 @@
   Time: 17:46
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 
 <div id="shoppingCart">
@@ -27,17 +27,21 @@
         <tbody>
         <c:forEach var="item" items="${CURRENT_SHOPPING_CART.items }">
             <tr id="product${item.product.id }" class="item">
-                <td class="text-center"><img class="small" src="${item.product.imageLink}" alt="${item.product.name}"><br>${item.product.name}</td>
+                <td class="text-center"><img class="small" src="${item.product.imageLink}"
+                                             alt="${item.product.name}"><br>${item.product.name}</td>
                 <td class="price">$ ${item.product.price }</td>
                 <td class="count">${item.count}</td>
                 <td class="hidden-print">
                     <c:choose>
                         <c:when test="${item.count > 1 }">
-                            <a class="btn btn-danger remove-product" data-id-product="${item.product.id }" data-count="1">Remove one</a><br><br>
-                            <a class="btn btn-danger remove-product remove-all" data-id-product="${item.product.id }" data-count="${item.count }">Remove all</a>
+                            <a class="btn btn-danger remove-product" data-id-product="${item.product.id }"
+                               data-count="1">Remove one</a><br><br>
+                            <a class="btn btn-danger remove-product remove-all" data-id-product="${item.product.id }"
+                               data-count="${item.count }">Remove all</a>
                         </c:when>
                         <c:otherwise>
-                            <a class="btn btn-danger remove-product" data-id-product="${item.product.id }" data-count="1">Remove one</a>
+                            <a class="btn btn-danger remove-product" data-id-product="${item.product.id }"
+                               data-count="1">Remove one</a>
                         </c:otherwise>
                     </c:choose>
                 </td>
@@ -53,12 +57,13 @@
         <div class="col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
             <c:choose>
                 <c:when test="${CURRENT_ACCOUNT != null }">
-                    <a href="javascript:void(0);" class="post-request btn btn-primary btn-block" data-url="/order">Make order</a>
+                    <a href="javascript:void(0);" class="post-request btn btn-primary btn-block" data-url="/order">Make
+                        order</a>
                 </c:when>
 
-            <c:otherwise>
-                <tags:sign-in classes="btn-block"/>
-            </c:otherwise>
+                <c:otherwise>
+                    <tags:sign-in classes="btn-block"/>
+                </c:otherwise>
             </c:choose>
         </div>
     </div>

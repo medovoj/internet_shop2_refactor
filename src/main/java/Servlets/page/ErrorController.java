@@ -10,13 +10,9 @@ import java.io.IOException;
 
 @WebServlet("/error")
 public class ErrorController extends AbstractController {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RoutingUtils.forwardToPage("error.jsp", request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

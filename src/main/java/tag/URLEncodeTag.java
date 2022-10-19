@@ -1,6 +1,5 @@
 package tag;
 
-import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 
 import java.io.IOException;
@@ -11,7 +10,7 @@ public class URLEncodeTag extends SimpleTagSupport {
     private String url;
 
     @Override
-    public void doTag() throws JspException, IOException {
+    public void doTag() throws IOException {
         String encodedUrl = URLEncoder.encode(url, "UTF-8");
         getJspContext().setAttribute(var, encodedUrl);
     }

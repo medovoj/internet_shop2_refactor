@@ -10,7 +10,8 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ishopNav" aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ishopNav"
+                    aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -19,10 +20,13 @@
             <a class="navbar-brand" href="products">MyShop</a>
         </div>
         <div class="collapse navbar-collapse" id="ishopNav">
-            <ul id="currentShoppingCart" class="nav navbar-nav navbar-right ${CURRENT_SHOPPING_CART == null ? 'hidden' : '' }">
+            <ul id="currentShoppingCart"
+                class="nav navbar-nav navbar-right ${CURRENT_SHOPPING_CART == null ? 'hidden' : '' }">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping cart (<span class="total-count">${CURRENT_SHOPPING_CART.totalCount}</span>)<span class="caret"></span>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping cart (<span
+                            class="total-count">${CURRENT_SHOPPING_CART.totalCount}</span>)<span class="caret"></span>
                     </a>
                     <div class="dropdown-menu shopping-cart-desc">
                         Total count: <span class="total-count">${CURRENT_SHOPPING_CART.totalCount}</span><br>
@@ -40,7 +44,7 @@
                     </ul>
                 </c:when>
                 <c:when test="${CURRENT_REQUEST_URL != '/sign-in' and CURRENT_REQUEST_URL != '/shopping-cart' }">
-                    <tags:sign-in classes="navbar-btn navbar-right sign-in" />
+                    <tags:sign-in classes="navbar-btn navbar-right sign-in"/>
                 </c:when>
             </c:choose>
         </div>

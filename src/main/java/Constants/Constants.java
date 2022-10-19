@@ -25,7 +25,6 @@ public final class Constants {
     public static final String CURRENT_REQUEST_URL = "CURRENT_REQUEST_URL";
 
 
-
     public enum Cookie {
         SHOPPING_CART("cc", 60 * 60 * 24 * 365);
 

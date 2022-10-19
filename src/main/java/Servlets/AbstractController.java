@@ -2,8 +2,6 @@ package Servlets;
 
 import Form.ProductForm;
 import Form.SearchForm;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import service.OrderService;
@@ -19,9 +17,9 @@ public abstract class AbstractController extends HttpServlet {
     private SocialService socialService;
 
     @Override
-    public final void init() throws ServletException {
+    public final void init() {
         productService = ServiceManager.getInstance(getServletContext()).getProductService();
-        orderService =  ServiceManager.getInstance(getServletContext()).getOrderService();
+        orderService = ServiceManager.getInstance(getServletContext()).getOrderService();
         socialService = ServiceManager.getInstance(getServletContext()).getSocialService();
     }
 
@@ -33,11 +31,11 @@ public abstract class AbstractController extends HttpServlet {
         return orderService;
     }
 
-    public SocialService getSocialService() { return socialService; }
+    public SocialService getSocialService() { return socialService;  }
 
     public final int getPageCount(int totalCount, int itemsPerPage) {
         int res = totalCount / itemsPerPage;
-        if(res * itemsPerPage != totalCount) {
+        if (res * itemsPerPage != totalCount) {
             res++;
         }
         return res;

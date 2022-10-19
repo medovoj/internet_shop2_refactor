@@ -6,9 +6,9 @@
   Time: 19:34
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <h4 class="text-center">My orders</h4>
-<hr />
+<hr/>
 <table id="myOrders" class="table table-bordered" data-page-number="1" data-page-count="${pageCount }">
     <thead>
     <tr>
@@ -22,7 +22,7 @@
             <td colspan="2" class="text-center">No orders found</td>
         </tr>
     </c:if>
-    <jsp:include page="../fragment/my-orders-tbody.jsp" />
+    <jsp:include page="../fragment/my-orders-tbody.jsp"/>
     </tbody>
 </table>
 <div class="text-center hidden-print">

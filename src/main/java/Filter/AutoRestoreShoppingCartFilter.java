@@ -12,8 +12,9 @@ import service.impl.ServiceManager;
 
 import java.io.IOException;
 
-@WebFilter(filterName="AutoRestoreShoppingCartFilter")
+@WebFilter(filterName = "AutoRestoreShoppingCartFilter")
 public class AutoRestoreShoppingCartFilter extends AbstractFilter {
+
     private static final String SHOPPING_CARD_DESERIALIZATION_DONE = "SHOPPING_CARD_DESERIALIZATION_DONE";
 
     private OrderService orderService;
@@ -25,12 +26,12 @@ public class AutoRestoreShoppingCartFilter extends AbstractFilter {
 
     @Override
     public void doFilter(HttpServletRequest req, HttpServletResponse resp, FilterChain chain) throws IOException, ServletException {
-        if(req.getSession().getAttribute(SHOPPING_CARD_DESERIALIZATION_DONE) == null){
-            if(!SessionUtils.isCurrentShoppingCartCreated(req)) {
+        if (req.getSession().getAttribute(SHOPPING_CARD_DESERIALIZATION_DONE) == null) {
+            if (!SessionUtils.isCurrentShoppingCartCreated(req)) {
                 Cookie cookie = SessionUtils.findShoppingCartCookie(req);
-                if(cookie != null) {
-                    ShoppingCart shoppingCart = null;
-                    if(shoppingCart != null) {
+                if (cookie != null) {
+                    ShoppingCart shoppingCart = orderService.deserializeShoppingCart(cookie.getValue());
+                    if (shoppingCart != null) {
                         SessionUtils.setCurrentShoppingCart(req, shoppingCart);
                     }
                 }

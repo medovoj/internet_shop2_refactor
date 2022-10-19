@@ -1,7 +1,6 @@
 package Servlets.page;
 
 
-import Constants.Constants;
 import Entity.Order;
 import Model.ShoppingCart;
 import Servlets.AbstractController;

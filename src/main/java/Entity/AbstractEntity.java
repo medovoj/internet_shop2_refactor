@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public abstract class AbstractEntity<T> implements Serializable {
 
-
     T id;
 
     public T getId() {

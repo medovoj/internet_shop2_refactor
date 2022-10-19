@@ -5,7 +5,6 @@ import Entity.Category;
 import Entity.Producer;
 import Entity.Product;
 import Form.SearchForm;
-import jakarta.xml.ws.handler.Handler;
 import jdbc.JDBCUtils;
 import jdbc.ResultSetHandler;
 import jdbc.ResultSetHandlerFactory;

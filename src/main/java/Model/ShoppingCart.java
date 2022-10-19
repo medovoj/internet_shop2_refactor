@@ -7,7 +7,6 @@ import Exception.ValidationException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -16,7 +15,7 @@ import Constants.Constants;
 
 public class ShoppingCart implements Serializable {
 
-    private Map<Integer, CartItem> products = new LinkedHashMap<>();
+    private final Map<Integer, CartItem> products = new LinkedHashMap<>();
     private int totalCount = 0;
     private BigDecimal totalCost = BigDecimal.ZERO;
 
