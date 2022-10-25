@@ -1,9 +1,12 @@
 package Entity;
 
+import framework.annotation.jdbc.Column;
+
 public class Category extends AbstractEntity<Integer> {
 
     private String name;
     private String url;
+    @Column("product_count")
     private Integer productCount;
 
     public String getName() {

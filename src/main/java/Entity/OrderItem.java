@@ -1,15 +1,20 @@
 package Entity;
 
+import framework.annotation.jdbc.Child;
+import framework.annotation.jdbc.Column;
+
 public class OrderItem extends AbstractEntity<Long> {
 
+    @Column("id_order")
     private Long idOrder;
+    @Child(columnName = "id_product")
     private Product product;
-    private int count;
+    private Integer count;
 
     public OrderItem() {
     }
 
-    public OrderItem(Product product, int count) {
+    public OrderItem(Product product, Integer count) {
         super();
         this.product = product;
         this.count = count;
@@ -39,11 +44,11 @@ public class OrderItem extends AbstractEntity<Long> {
         this.product = product;
     }
 
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 

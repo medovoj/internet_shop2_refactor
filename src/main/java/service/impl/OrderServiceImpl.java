@@ -9,9 +9,11 @@ import Model.CartItem;
 import Model.CurrentAccount;
 import Model.ShoppingCart;
 import Model.SocialAccount;
+import framework.handler.DefaultListResultSetHandler;
+import framework.handler.DefaultUniqueResultSetHandler;
+import framework.handler.IntResultSetHandler;
 import jdbc.JDBCUtils;
-import jdbc.ResultSetHandler;
-import jdbc.ResultSetHandlerFactory;
+import framework.handler.ResultSetHandler;
 import service.OrderService;
 
 import javax.sql.DataSource;
@@ -28,18 +30,12 @@ import Exception.ResourceNotFoundException;
 
 
 class OrderServiceImpl implements OrderService {
-    private static final ResultSetHandler<Product> productResultSetHandler =
-            ResultSetHandlerFactory.getSingleResultSetHandler(ResultSetHandlerFactory.PRODUCT_RESULT_SET_HANDLER);
-    private static final ResultSetHandler<Account> accountResultSetHandler =
-            ResultSetHandlerFactory.getSingleResultSetHandler(ResultSetHandlerFactory.ACCOUNT_RESULT_SET_HANDLER);
-    private final ResultSetHandler<Order> orderResultSetHandler =
-            ResultSetHandlerFactory.getSingleResultSetHandler(ResultSetHandlerFactory.ORDER_RESULT_SET_HANDLER);
-    private final ResultSetHandler<List<OrderItem>> orderItemListResultSetHandler =
-            ResultSetHandlerFactory.getListResultSetHandler(ResultSetHandlerFactory.ORDER_ITEM_RESULT_SET_HANDLER);
-    private final ResultSetHandler<List<Order>> ordersResultSetHandler =
-            ResultSetHandlerFactory.getListResultSetHandler(ResultSetHandlerFactory.ORDER_RESULT_SET_HANDLER);
-    private final ResultSetHandler<Integer> countResultSetHandler =
-            ResultSetHandlerFactory.getCountResultSetHandler();
+    private final ResultSetHandler<Product> productResultSetHandler = new DefaultUniqueResultSetHandler<>(Product.class);
+    private final ResultSetHandler<Account> accountResultSetHandler = new DefaultUniqueResultSetHandler<>(Account.class);
+    private final ResultSetHandler<Order> orderResultSetHandler = new DefaultUniqueResultSetHandler<>(Order.class);
+    private final ResultSetHandler<List<OrderItem>> orderItemListResultSetHandler = new DefaultListResultSetHandler<>(OrderItem.class);
+    private final ResultSetHandler<List<Order>> ordersResultSetHandler = new DefaultListResultSetHandler<>(Order.class);
+    private final ResultSetHandler<Integer> countResultSetHandler = new IntResultSetHandler();
 
 
     private final DataSource dataSource;

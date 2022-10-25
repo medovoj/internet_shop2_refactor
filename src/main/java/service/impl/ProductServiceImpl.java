@@ -5,9 +5,10 @@ import Entity.Category;
 import Entity.Producer;
 import Entity.Product;
 import Form.SearchForm;
+import framework.handler.DefaultListResultSetHandler;
+import framework.handler.IntResultSetHandler;
 import jdbc.JDBCUtils;
-import jdbc.ResultSetHandler;
-import jdbc.ResultSetHandlerFactory;
+import framework.handler.ResultSetHandler;
 import jdbc.SearchQuery;
 import service.ProductService;
 
@@ -20,13 +21,10 @@ import Exception.InternalServerErrorException;
 
 class ProductServiceImpl implements ProductService {
 
-    private static final ResultSetHandler<List<Product>> productsResultSetHandler =
-            ResultSetHandlerFactory.getListResultSetHandler(ResultSetHandlerFactory.PRODUCT_RESULT_SET_HANDLER);
-    private final ResultSetHandler<List<Category>> categoryListResultSetHandler =
-            ResultSetHandlerFactory.getListResultSetHandler(ResultSetHandlerFactory.CATEGORY_RESULT_SET_HANDLER);
-    private final ResultSetHandler<List<Producer>> producerListResultSetHandler =
-            ResultSetHandlerFactory.getListResultSetHandler(ResultSetHandlerFactory.PRODUCER_RESULT_SET_HANDLER);
-    private final ResultSetHandler<Integer> countResultSetHandler = ResultSetHandlerFactory.getCountResultSetHandler();
+    private final ResultSetHandler<List<Product>> productsResultSetHandler = new DefaultListResultSetHandler<>(Product.class);
+    private final ResultSetHandler<List<Category>> categoryListResultSetHandler = new DefaultListResultSetHandler<>(Category.class);
+    private final ResultSetHandler<List<Producer>> producerListResultSetHandler = new DefaultListResultSetHandler<>(Producer.class);
+    private final ResultSetHandler<Integer> countResultSetHandler = new IntResultSetHandler();
 
     private final DataSource dataSource;
 

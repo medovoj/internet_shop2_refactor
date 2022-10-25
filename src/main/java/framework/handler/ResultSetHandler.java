@@ -1,4 +1,4 @@
-package jdbc;
+package framework.handler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

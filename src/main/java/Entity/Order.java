@@ -1,12 +1,16 @@
 package Entity;
 
+import framework.annotation.jdbc.Column;
+import framework.annotation.jdbc.Transient;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
 public class Order extends AbstractEntity<Long> {
-
+    @Column("id_account")
     private Integer idAccount;
+    @Transient
     private List<OrderItem> items;
     private Timestamp created;
 
