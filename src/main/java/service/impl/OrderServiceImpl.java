@@ -138,7 +138,7 @@ class OrderServiceImpl implements OrderService {
                 throw new AccessDeniedException("Account with id=" + currentAccount.getId() + " is not owner for order with id=" + id);
             }
             List<OrderItem> list = JDBCUtils.select(c,
-                    "select o.id as oid, o.id_order as id_order, o.id_product, o.count, p.*, c.name as category, pr.name as producer " +
+                    "select o.id, o.id_order as id_order, o.id_product, o.count, p.id as pid, p.name, p.description, p.price, p.image_link, c.name as category, pr.name as producer " +
                             "from my_shop.order_item o, my_shop.product p, my_shop.category c, my_shop.producer pr "
                             + "where pr.id=p.id_producer and c.id=p.id_category and o.id_product=p.id and o.id_order=?",
                     orderItemListResultSetHandler, id);

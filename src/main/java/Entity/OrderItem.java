@@ -7,7 +7,7 @@ public class OrderItem extends AbstractEntity<Long> {
 
     @Column("id_order")
     private Long idOrder;
-    @Child(columnName = "id_product")
+    @Child(columnName = "pid")
     private Product product;
     private Integer count;
 
